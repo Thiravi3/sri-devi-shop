@@ -9,13 +9,15 @@ export const revalidate = 0;
 export default async function IceCreamsPage() {
   let data = { iceCreams: [] };
   
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
   try {
-    const res = await fetch('https://kvdb.io/KM3MdUap18RMXcTfSv5LBU/shop_data?_t=' + Date.now(), { cache: 'no-store' });
+    const res = await fetch(`${apiUrl}/api/data?_t=${Date.now()}`, { cache: 'no-store' });
     if (res.ok) {
       data = await res.json();
     }
   } catch (error) {
-    console.error('Failed to read data from KVDB', error);
+    console.error('Failed to read data from Backend', error);
   }
 
   const { iceCreams } = data;
