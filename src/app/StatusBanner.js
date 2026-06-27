@@ -5,13 +5,11 @@ import { ThemeToggle } from "./ThemeToggle";
 export function StatusBanner() {
   const [isOpen, setIsOpen] = useState(null);
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
   useEffect(() => {
     // Fetch the initial status
     const fetchStatus = async () => {
       try {
-        const res = await fetch(`${apiUrl}/api/data?_t=` + Date.now(), { cache: 'no-store' });
+        const res = await fetch(`/api/data?_t=` + Date.now(), { cache: 'no-store' });
         const json = await res.json();
         setIsOpen(json.isOpen);
       } catch (error) {

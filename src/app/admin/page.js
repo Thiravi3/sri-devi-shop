@@ -29,8 +29,6 @@ export default function AdminDashboard() {
 
   const [usingKV, setUsingKV] = useState(true);
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
   useEffect(() => {
     if (isAuthenticated) {
       fetchData();
@@ -39,7 +37,7 @@ export default function AdminDashboard() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch(`${apiUrl}/api/data`, { cache: 'no-store' });
+      const res = await fetch(`/api/data`, { cache: 'no-store' });
       const json = await res.json();
       if (!json.mainMenu) json.mainMenu = [];
       if (!json.contact) json.contact = { phone: "", address: "" };
@@ -56,7 +54,7 @@ export default function AdminDashboard() {
 
   const saveData = async (newData) => {
     try {
-      await fetch(`${apiUrl}/api/data`, {
+      await fetch(`/api/data`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newData),
