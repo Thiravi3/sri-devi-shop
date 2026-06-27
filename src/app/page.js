@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import fs from 'fs';
 import path from 'path';
+import { kv } from '@vercel/kv';
 import { ClientInteractive } from "./ClientInteractive";
 
 
@@ -10,13 +11,23 @@ export const revalidate = 0;
 
 export default async function Home() {
   // Read data directly in the server component
-  const dataFilePath = path.join(process.cwd(), 'data.json');
   let data = { isOpen: false, iceCreams: [], mainMenu: [], contact: { phone: "+91 98765 43210", address: "123 Main Street<br />Cityville, State 12345" } };
+  
   try {
-    const fileContents = fs.readFileSync(dataFilePath, 'utf8');
-    data = JSON.parse(fileContents);
+    let kvData = null;
+    if (process.env.KV_REST_API_URL) {
+      kvData = await kv.get('shop_data');
+    }
+    
+    if (kvData) {
+      data = kvData;
+    } else {
+      const dataFilePath = path.join(process.cwd(), 'data.json');
+      const fileContents = fs.readFileSync(dataFilePath, 'utf8');
+      data = JSON.parse(fileContents);
+    }
   } catch (error) {
-    console.error('Failed to read data.json', error);
+    console.error('Failed to read data', error);
   }
 
   const { isOpen, iceCreams } = data;
