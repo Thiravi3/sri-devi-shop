@@ -5,6 +5,8 @@ import { kv } from '@vercel/kv';
 
 const dataFilePath = path.join(process.cwd(), 'data.json');
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     // Try to get data from KV first
@@ -23,14 +25,14 @@ export async function GET() {
         await kv.set('shop_data', data);
       }
     }
-    return NextResponse.json(data);
+    return NextResponse.json({ ...data, usingKV: !!process.env.KV_REST_API_URL });
   } catch (error) {
     console.error('Failed to read data:', error);
     // If KV fails (e.g., local dev without KV configured), fallback to file
     try {
       const fileContents = fs.readFileSync(dataFilePath, 'utf8');
       const data = JSON.parse(fileContents);
-      return NextResponse.json(data);
+      return NextResponse.json({ ...data, usingKV: false });
     } catch (fallbackError) {
       return NextResponse.json({ error: 'Failed to read data' }, { status: 500 });
     }

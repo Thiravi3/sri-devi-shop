@@ -27,6 +27,8 @@ export default function AdminDashboard() {
   const [contactAddress, setContactAddress] = useState("");
   const [contactMapUrl, setContactMapUrl] = useState("");
 
+  const [usingKV, setUsingKV] = useState(true);
+
   useEffect(() => {
     if (isAuthenticated) {
       fetchData();
@@ -35,11 +37,12 @@ export default function AdminDashboard() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch("/api/data");
+      const res = await fetch("/api/data", { cache: 'no-store' });
       const json = await res.json();
       if (!json.mainMenu) json.mainMenu = [];
       if (!json.contact) json.contact = { phone: "", address: "" };
       setData(json);
+      setUsingKV(json.usingKV !== false);
       setContactPhone(json.contact.phone || "");
       setContactAddress(json.contact.address || "");
       setContactMapUrl(json.contact.mapUrl || "");
@@ -215,6 +218,12 @@ export default function AdminDashboard() {
           <h1 style={{ fontSize: "2.5rem", fontWeight: 800, color: "var(--primary-dark)" }}>Admin Dashboard</h1>
           <a href="/" className="btn" style={{ border: "1px solid var(--text-light)", color: "var(--text-dark)" }}>View Live Site</a>
         </div>
+
+        {!usingKV && (
+          <div style={{ backgroundColor: '#fee2e2', color: '#991b1b', padding: '1rem', borderRadius: '8px', marginBottom: '2rem', border: '1px solid #f87171' }}>
+            <strong>Warning:</strong> Vercel KV Database is not connected! Changes made here will not be saved on the live site. Please set up Vercel KV in your Vercel Dashboard.
+          </div>
+        )}
 
         {/* Shop Settings (Status & Contact) */}
         <div className="glass-card" style={{ padding: "2rem", marginBottom: "2rem" }}>
