@@ -1,33 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import fs from 'fs';
-import path from 'path';
-import { kv } from '@vercel/kv';
-
 import { BillEstimator } from "./BillEstimator";
 
-// Revalidate every 0 seconds to ensure fresh data since we read from a local file
+// Revalidate every 0 seconds to ensure fresh data
 export const revalidate = 0;
 
 export default async function IceCreamsPage() {
-  // Read data directly in the server component
   let data = { iceCreams: [] };
   
   try {
-    let kvData = null;
-    if (process.env.KV_REST_API_URL) {
-      kvData = await kv.get('shop_data');
-    }
-    
-    if (kvData) {
-      data = kvData;
-    } else {
-      const dataFilePath = path.join(process.cwd(), 'data.json');
-      const fileContents = fs.readFileSync(dataFilePath, 'utf8');
-      data = JSON.parse(fileContents);
+    const res = await fetch('https://kvdb.io/KM3MdUap18RMXcTfSv5LBU/shop_data', { cache: 'no-store' });
+    if (res.ok) {
+      data = await res.json();
     }
   } catch (error) {
-    console.error('Failed to read data', error);
+    console.error('Failed to read data from KVDB', error);
   }
 
   const { iceCreams } = data;
