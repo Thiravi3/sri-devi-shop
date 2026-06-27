@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 
 const KVDB_URL = 'https://kvdb.io/KM3MdUap18RMXcTfSv5LBU/shop_data';
 
 export async function GET() {
   try {
-    const res = await fetch(KVDB_URL, { cache: 'no-store' });
+    const res = await fetch(KVDB_URL + '?_t=' + Date.now(), { cache: 'no-store' });
     const data = await res.json();
     return NextResponse.json({ ...data, usingKV: true });
   } catch (error) {

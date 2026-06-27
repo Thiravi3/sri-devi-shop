@@ -9,7 +9,7 @@ export function StatusBanner() {
     // Fetch the initial status
     const fetchStatus = async () => {
       try {
-        const res = await fetch("/api/data", { cache: 'no-store' });
+        const res = await fetch("/api/data?_t=" + Date.now(), { cache: 'no-store' });
         const json = await res.json();
         setIsOpen(json.isOpen);
       } catch (error) {

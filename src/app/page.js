@@ -2,14 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ClientInteractive } from "./ClientInteractive";
 
-// Revalidate every 0 seconds to ensure fresh data
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 export const revalidate = 0;
 
 export default async function Home() {
   let data = { isOpen: false, iceCreams: [], mainMenu: [], contact: { phone: "+91 98765 43210", address: "123 Main Street<br />Cityville, State 12345" } };
   
   try {
-    const res = await fetch('https://kvdb.io/KM3MdUap18RMXcTfSv5LBU/shop_data', { cache: 'no-store' });
+    const res = await fetch('https://kvdb.io/KM3MdUap18RMXcTfSv5LBU/shop_data?_t=' + Date.now(), { cache: 'no-store' });
     if (res.ok) {
       data = await res.json();
     }
