@@ -1,0 +1,130 @@
+{
+  "isOpen": true,
+  "iceCreams": [
+    {
+      "id": "3",
+      "name": "Chocolate Bite",
+      "price": 5,
+      "type": "Bite"
+    },
+    {
+      "id": "4",
+      "name": "Mango Bite",
+      "price": 10,
+      "type": "Bite"
+    },
+    {
+      "id": "1781837951245",
+      "name": "Vanilla Small Cone",
+      "price": 30,
+      "type": "Cone"
+    },
+    {
+      "id": "1781838110518",
+      "name": "Cotton Candy Bite",
+      "price": 5,
+      "type": "Bite"
+    },
+    {
+      "id": "1781838141716",
+      "name": "Vanilla Small",
+      "price": 20,
+      "type": "Cup"
+    },
+    {
+      "id": "1781838390084",
+      "name": "Double Chocolate Cone",
+      "price": 60,
+      "type": "Cone"
+    },
+    {
+      "id": "1781838449946",
+      "name": "Black Current I Cone",
+      "price": 60,
+      "type": "Cone"
+    },
+    {
+      "id": "1781838464644",
+      "name": "Red Velvet I Cone",
+      "price": 60,
+      "type": "Cone"
+    },
+    {
+      "id": "1781838733260",
+      "name": "Butterscotch I Cone",
+      "price": 60,
+      "type": "Cone"
+    },
+    {
+      "id": "1781839526722",
+      "name": "Orange Stick",
+      "price": 15,
+      "type": "Stick"
+    },
+    {
+      "name": "Test Ice",
+      "price": 10,
+      "type": "Bite",
+      "id": "1782183991971"
+    }
+  ],
+  "mainMenu": [
+    {
+      "id": "item-1",
+      "name": "Fresh Sugarcane Juice",
+      "description": "Pure, healthy, and squeezed fresh on order with a hint of lemon and ginger.",
+      "image": "/sugarcane_juice.png",
+      "variants": [
+        {
+          "name": "Regular Glass",
+          "price": 25
+        },
+        {
+          "name": "Big Glass",
+          "price": 35
+        },
+        {
+          "name": "Juice Parcel",
+          "price": 35
+        },
+        {
+          "name": "Half Litre",
+          "price": 55
+        },
+        {
+          "name": "One Litre",
+          "price": 100
+        }
+      ]
+    },
+    {
+      "id": "item-2",
+      "name": "Soda (Sweet/Salt)",
+      "description": "Refreshing and bubbly soda, available in sweet or salted flavors.",
+      "image": "/soda_drink.png",
+      "variants": [
+        {
+          "name": "Glass",
+          "price": 30
+        }
+      ]
+    },
+    {
+      "id": "item-3",
+      "name": "Nannari Sarbath",
+      "description": "Traditional cooling drink made from nannari root syrup, perfect for beating the heat.",
+      "image": "/nannari_sarbath.png",
+      "variants": [
+        {
+          "name": "Glass",
+          "price": 25
+        }
+      ]
+    }
+  ],
+  "contact": {
+    "phone": "9444019591",
+    "address": "",
+    "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15553.30948950489!2d77.5855268!3d12.9493976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15b1fb4b0b1f%3A0x868b446a815a133!2sLalbagh%20Botanical%20Garden!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+  }
+}
