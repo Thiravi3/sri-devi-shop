@@ -9,16 +9,13 @@ export const revalidate = 0;
 export default async function Home() {
   let data = { isOpen: false, iceCreams: [], mainMenu: [], contact: { phone: "+91 98765 43210", address: "123 Main Street<br />Cityville, State 12345" } };
   
-  // Hardcode localhost for absolute URL during SSR
-  const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
-
   try {
-    const res = await fetch(`${baseUrl}/api/data?_t=${Date.now()}`, { cache: 'no-store' });
+    const res = await fetch('https://kvdb.io/KM3MdUap18RMXcTfSv5LBU/shop_data?_t=' + Date.now(), { cache: 'no-store' });
     if (res.ok) {
       data = await res.json();
     }
   } catch (error) {
-    console.error('Failed to read data from API', error);
+    console.error('Failed to read data from KVDB', error);
   }
 
   const { isOpen, iceCreams } = data;
